@@ -1,0 +1,30 @@
+{
+  "name": "node_api_example",
+  "version": "1.0.0",
+  "description": "Just a small example of a Node.js API",
+  "main": "server.js",
+  "scripts": {
+    "test": "node test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theinfamousrj/Node_API_Example.git"
+  },
+  "keywords": [
+    "example",
+    "node",
+    "api"
+  ],
+  "author": "Raymond John Hill",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/theinfamousrj/Node_API_Example/issues"
+  },
+  "homepage": "https://github.com/theinfamousrj/Node_API_Example#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "express": "^4.16.2"
+  }
+}

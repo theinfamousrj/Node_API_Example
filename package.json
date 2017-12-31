@@ -4,8 +4,9 @@
   "description": "Just a small example of a Node.js API",
   "main": "server.js",
   "scripts": {
-    "test": "mocha test",
-    "start": "nodemon server.js localhost 8080",
+    "test": "mocha tests",
+    "start": "node server.js",
+    "auto": "nodemon server.js localhost 8080",
     "cover": "istanbul cover _mocha",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },

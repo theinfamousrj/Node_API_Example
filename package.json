@@ -29,7 +29,8 @@
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "dateformat": "^3.0.2",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "lowercase-keys": "^1.0.0"
   },
   "devDependencies": {
     "apidoc": "^0.17.6",

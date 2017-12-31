@@ -45,9 +45,11 @@ app.use('/documentation', express.static('static/documentation'));
 app.use('/status', (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
 
-    return res.status(200).send({
+    res.status(200).send({
         status: 'LIVE'
     });
+
+    return next();
 });
 
 app.use('/version', (req, res, next) => {
@@ -56,12 +58,22 @@ app.use('/version', (req, res, next) => {
     let fs = require('fs');
     let obj = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 
-    return res.status(200).send({
+    res.status(200).send({
         version: obj.version || '1.0.0'
     });
+
+    return next();
 });
 //END NON-STATIC ROUTES
 
+
+app.use((err, req, res, next) => {
+    return res.end();
+});
+
+app.use((req, res, next) => {
+    return res.end();
+});
 
 
 app.listen(port, () => {
@@ -71,3 +83,6 @@ app.listen(port, () => {
     dateFormat.masks.serverTime = "mm/dd/yy hh:MM:ss TT";
     console.log('(%s) Listening on %s:%s', dateFormat(now, "serverTime"), host, port);
 });
+
+//Exporting this for the test suite
+module.exports = app;

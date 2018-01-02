@@ -1,0 +1,109 @@
+define({ "api": [
+  {
+    "type": "get",
+    "url": "/geocode/",
+    "title": "Request Geocoding of Address",
+    "name": "GeocodeAddress",
+    "group": "Services",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>The address to geocode.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "location",
+            "description": "<p>The location of the address in lat/lng.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "location_type",
+            "description": "<p>Where the lat/lng is actually located, in reference to the structure at the same location.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "viewport",
+            "description": "<p>The viewport (or envelope) that contains the lat/lng (useful for zoom to fit).</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "bounds",
+            "description": "<p>The bounding box (or envelope) that contains the lat/lng (useful for zoom to fit).</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "services/services.js",
+    "groupTitle": "Services"
+  },
+  {
+    "type": "get",
+    "url": "/reverseGeocode",
+    "title": "Request Reverse Geocoding of Latitude and Longitude",
+    "name": "ReverseGeocode",
+    "group": "Services",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "latlng",
+            "description": "<p>The latitude and longitude to reverse geocode.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "address_components",
+            "description": "<p>All of the components of the address, both long and short versions.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "formatted_address",
+            "description": "<p>The actual address in a human-readable format.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "viewport",
+            "description": "<p>The viewport (or envelope) that contains the lat/lng (useful for zoom to fit).</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "services/services.js",
+    "groupTitle": "Services"
+  }
+] });

@@ -8,7 +8,8 @@
     "auto": "nodemon server.js",
     "test": "mocha tests --exit",
     "cover": "istanbul cover _mocha",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
+    "doc": "apidoc -i ./services/ -o ./static/documentation/"
   },
   "repository": {
     "type": "git",

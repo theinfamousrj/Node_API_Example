@@ -14,6 +14,7 @@ const express = require('express');
 const dateFormat = require('dateformat');
 const bodyParser = require('body-parser');
 const compression = require('compression');
+const lowercaseKeys = require('lowercase-keys');
 
 
 //Ensure that we catch everything, just in case.
@@ -32,6 +33,32 @@ app.use(bodyParser.json({ limit: '10mb' }));
 app.use(compression());
 
 
+
+//No mount path, executed for every request
+app.use((req, res, next) => {
+    //This is a fake API key for testing.
+    if(!req.headers.hasOwnProperty('apikey')) {
+        req.headers.apikey = process.env.fakeKey || 'testKey12345';
+    }
+
+    //Lowercase all of the keys of our objects
+    req.body = lowercaseKeys(req.body);
+    req.query = lowercaseKeys(req.query);
+    req.params = lowercaseKeys(req.params);
+
+    //Good to have just in case we need this later
+    let ip = req.headers['x-forwarded-for'] ||
+             req.connection.remoteAddress ||
+             req.socket.remoteAddress ||
+             req.connection.socket.remoteAddress;
+
+    req.user_ip = ip;
+
+    next();
+});
+
+
+
 //BEGIN STATIC ROUTES
 app.use('/info', express.static('static/info'));
 
@@ -39,6 +66,7 @@ app.use('/images', express.static('static/images'));
 
 app.use('/documentation', express.static('static/documentation'));
 //END STATIC ROUTES
+
 
 
 //BEGIN NON-STATIC ROUTES
@@ -64,7 +92,10 @@ app.use('/version', (req, res, next) => {
 
     return next();
 });
+
+app.use('/services', require('./services/services.js'));
 //END NON-STATIC ROUTES
+
 
 
 app.use((err, req, res, next) => {
@@ -74,6 +105,7 @@ app.use((err, req, res, next) => {
 app.use((req, res, next) => {
     return res.end();
 });
+
 
 
 app.listen(port, () => {
